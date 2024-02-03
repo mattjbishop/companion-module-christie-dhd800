@@ -1,2 +1,3 @@
-# companion-module-christie-dhd800
-Companion module for the Christie DHD800 Projector
+# companion-module-generic-tcp-udp
+
+Christie DHD800
