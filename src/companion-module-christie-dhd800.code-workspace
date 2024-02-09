@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../companion-module-wyrestorm-mx606pp"
+		},
+		{
+			"path": "../../companion-module-template"
+		},
+		{
+			"path": "../../companion-module-sanyo-projector"
+		}
+	],
+	"settings": {}
+}

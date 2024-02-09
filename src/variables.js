@@ -1,5 +1,6 @@
-module.exports = async function (self) {
-	self.setVariableDefinitions([
-		
-	])
+export function getVariableDefinitions(self) {
+	let variableDefinitions = [];
+  
+    return variableDefinitions;
+
 }

@@ -1,6 +1,5 @@
-module.exports = async function (self) {
+export function getPresets(self) {
 	let presets = [];
   
-    self.setPresetDefinitions(presets);
-
+    return presets;
 }

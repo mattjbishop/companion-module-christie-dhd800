@@ -1,5 +1,8 @@
-export function getActionDefinitions(self) {
-	return {
-		
+export function getActions(self) {
+
+	const actionDefs = {
+
 	}
+
+	return actionDefs;
 }

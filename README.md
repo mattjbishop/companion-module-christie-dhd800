@@ -1,3 +1,3 @@
-# companion-module-generic-tcp-udp
+# companion-module-christie-dhd800
 
 Christie DHD800

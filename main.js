@@ -1,11 +1,18 @@
-import { InstanceBase, InstanceStatus, runEntrypoint, TelnetHelper } from '@companion-module/base'
+import { InstanceBase, InstanceStatus, runEntrypoint } from '@companion-module/base'
 import { ConfigFields } from './src/config.js'
-import { getActionDefinitions } from './src/actions.js'
+import { getActions } from './src/actions.js'
+import { getFeedbacks } from './src/feedbacks.js'
+import { getPresets } from './src/presets.js'
+import { getVariableDefinitions } from './src/variables.js'
+import { initTCP } from './src/api.js'
+
 
 class ChristieInstance extends InstanceBase {
 	
 	constructor(internal) {
 		super(internal)
+
+		this.login = false;
 	}
 
 // https://github.com/bitfocus/companion-module-generic-pjlink/blob/master/pjlink.js has a good structure
@@ -13,44 +20,66 @@ class ChristieInstance extends InstanceBase {
 
 
 	async init(config) {
-		this.config = config
+		this.startup(config);
+	}
 
-		this.setActionDefinitions(getActionDefinitions(this))
+	startup(config) {
+		this.config = config;
+		this.login = false;
+		this.projectorStatus = "";
+		//this.heartbeatTime = 10;
+		//this.heartbeatInterval = null;
 
-		await this.configUpdated(config)
+		this.getConfigFields();
+		this.updateActions();
+		this.updateFeedbacks();
+		this.updateVariableDefinitions();
+		this.updatePresets();
+		initTCP(this);
+	}
+
+	destroy() {
+		// destroy stuff
+		if (this.socket !== undefined) {
+			this.socket.destroy()
+			delete this.socket
+		}
+
+		if (this.poll_interval !== undefined) {
+			clearInterval(this.poll_interval)
+			delete this.poll_interval
+		}
+
+		if (this.socketTimer) {
+			clearInterval(this.socketTimer)
+			delete this.socketTimer
+		}
 	}
 
 	async configUpdated(config) {
-		// destroy any open socket
-
-		this.config = config
-
-		// run startup actions 
-	}
-
-	async destroy() {
-		// destroy stuff
+		this.destroy();
+		this.startup(config);
 	}
 
 	// Return config fields for web config
 	getConfigFields() {
-		return ConfigFields
+		return ConfigFields(this);
 	}
 
 	updateActions() {
-		//
+		this.setActionDefinitions(getActions(this));		
 	}
 
 	updateFeedbacks() {
-		//
+		this.setFeedbackDefinitions(getFeedbacks(this));
 	}
 
 	updateVariableDefinitions() {
-		//
+		this.setVariableDefinitions(getVariableDefinitions(this));
 	}
 
 	updatePresets() {
-		//
+		this.setPresetDefinitions(getPresets(this));
 	}
 
 }

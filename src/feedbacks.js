@@ -1,5 +1,5 @@
-module.exports = async function (self) {
+export function getFeedbacks(self) {
 	let feedbacks = {};
 
-    self.setFeedbackDefinitions(feedbacks);
+    return feedbacks;
 }
