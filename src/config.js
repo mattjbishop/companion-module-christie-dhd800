@@ -13,8 +13,8 @@ export const ConfigFields = [
         type: 'textinput',
         id: 'port',
         label: 'Target Port',
-        width: 4,
-        default: 23,
+        width: 5,
+        default: 10000,
         regex: Regex.PORT,
     },
     {

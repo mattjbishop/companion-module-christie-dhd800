@@ -4,3 +4,4 @@ package-lock.json
 /pkg.tgz
 yarn.lock
 .DS_Store
+src/companion-module-christie-dhd800.code-workspace

@@ -1,6 +1,7 @@
 export function getVariableDefinitions(self) {
 	let variableDefinitions = [];
   
-    return variableDefinitions;
+    variableDefinitions.push({ variableId: 'status', name: 'Projector Status' });
 
+    return variableDefinitions;
 }

@@ -1,3 +1,5 @@
+// update this to the latest format !!!
+
 module.exports = [
 	/*
 	 * Place your upgrade scripts here
