@@ -1,14 +1,12 @@
-import { InstanceBase, InstanceStatus, runEntrypoint } from '@companion-module/base'
-import { ConfigFields } from './src/config.js'
-import { getActions } from './src/actions.js'
-import { getFeedbacks } from './src/feedbacks.js'
-import { getPresets } from './src/presets.js'
-import { getVariableDefinitions } from './src/variables.js'
-import { initTCP } from './src/api.js'
-
+import { InstanceBase, InstanceStatus, runEntrypoint } from '@companion-module/base';
+import { ConfigFields } from './src/config.js';
+import { getActions } from './src/actions.js';
+import { getFeedbacks } from './src/feedbacks.js';
+import { getPresets } from './src/presets.js';
+import { getVariableDefinitions } from './src/variables.js';
+import { initTCP } from './src/api.js';
 
 class ChristieInstance extends InstanceBase {
-	
 	constructor(internal) {
 		super(internal);
 	}
@@ -21,7 +19,7 @@ class ChristieInstance extends InstanceBase {
 		// reset everything
 		this.config = config;
 		this.login = false;
-		this.projectorStatus = "";
+		this.projectorStatus = '';
 		this.pollingInterval = null;
 
 		// setup everything
@@ -68,7 +66,7 @@ class ChristieInstance extends InstanceBase {
 
 	// Set the action definitions
 	updateActions() {
-		this.setActionDefinitions(getActions(this));		
+		this.setActionDefinitions(getActions(this));
 	}
 
 	// Set the feedback definitions
@@ -86,15 +84,15 @@ class ChristieInstance extends InstanceBase {
 		this.setPresetDefinitions(getPresets(this));
 	}
 
-	// update the status of the projector. This will update the related variables and 
-	// then nudge the relevant feedbacks 
+	// update the status of the projector. This will update the related variables and
+	// then nudge the relevant feedbacks
 	updateProjectorStatus(updatedStatus) {
 		this.projectorStatus = updatedStatus;
 		this.log('info', 'Projector status updated to ' + updatedStatus);
 		this.checkFeedbacks('status');
 		this.checkFeedbacks('simple_state');
-		this.setVariableValues({ status: updatedStatus});
+		this.setVariableValues({ status: updatedStatus });
 	}
 }
 
-runEntrypoint(ChristieInstance, [])
+runEntrypoint(ChristieInstance, []);
