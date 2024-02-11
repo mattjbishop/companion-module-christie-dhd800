@@ -117,7 +117,7 @@ export function initTCP(self) {
 
 			self.log('debug', `DHD800: < ${data}`);
 
-			if (self.login === false && receivebuffer.match(/PASSWORD:/)) {
+			if (self.login === false && data.match(/PASSWORD:/)) {
 				sendCommand(self.config.pass, self);
 			} else if (self.login === false && data.match(/Hello/)) {
 				//Successful Login
@@ -149,7 +149,6 @@ export function initTCP(self) {
 
 // Send a command to the projector
 export function sendCommand(cmd, self, refreshStatus = false) {
-	self.log('debug', 'sendCommand called: ' + cmd);
 	if (cmd !== undefined) {
 		/*
 		 * create a binary buffer pre-encoded 'latin1' (8bit no change bytes)
@@ -159,7 +158,6 @@ export function sendCommand(cmd, self, refreshStatus = false) {
 		 */
 		const sendBuf = Buffer.from(cmd + SEND_LINE_ENDING, 'latin1');
 
-		self.log('debug', 'Sending: ' + cmd);
 		if (self.socket !== undefined && self.socket.isConnected) {
 			self.log('debug', 'sending to ' + self.config.host + ': ' + sendBuf.toString());
 			self.socket.send(sendBuf);
