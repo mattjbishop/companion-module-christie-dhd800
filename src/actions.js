@@ -8,7 +8,6 @@ export function getActions(self) {
 			options: [],
 			callback: async (event) => {
 				let cmd = ExecutionCommmands.POWER_ON;
-				self.log('debug', 'Power ON. Command is ' + cmd);
 				sendCommand(cmd, self, true);
 			},
 		},
@@ -19,7 +18,26 @@ export function getActions(self) {
 			options: [],
 			callback: async (event) => {
 				let cmd = ExecutionCommmands.POWER_OFF;
-				self.log('debug', 'Power OFF. Command is ' + cmd);
+				sendCommand(cmd, self, true);
+			},
+		},
+
+		// mute the projector
+		muteOn: {
+			name: 'Video Mute On',
+			options: [],
+			callback: async (event) => {
+				let cmd = ExecutionCommmands.VIDEO_MUTE_ON;
+				sendCommand(cmd, self, true);
+			},
+		},
+
+		// unmute the projector
+		muteOff: {
+			name: 'Video Mute Off',
+			options: [],
+			callback: async (event) => {
+				let cmd = ExecutionCommmands.VIDEO_MUTE_OFF;
 				sendCommand(cmd, self, true);
 			},
 		},
