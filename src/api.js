@@ -89,15 +89,19 @@ export function initTCP(self) {
 		});
 
 		self.socket.on('data', (chunk) => {
-			// this code is from generic-pjlink - it does what we tried to do in the wyrestorm module... :-)
 			// separate buffered stream into lines with responses
-
 			self.log('debug', `data: < ${chunk}`);
 
 			let i = 0,
 				line = '',
 				offset = 0;
 			receivebuffer += chunk;
+
+			// this is a fix for where the projector prompts for a password
+			if (self.login == false && !receivebuffer.endsWith('\r')) {
+				receivebuffer += '\r';
+			}
+
 			while ((i = receivebuffer.indexOf('\r', offset)) !== -1) {
 				line = receivebuffer.slice(offset, i);
 				offset = i + 1;
